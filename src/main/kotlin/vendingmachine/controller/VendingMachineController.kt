@@ -27,7 +27,7 @@ class VendingMachineController(
     }
 
     private fun setProduct() {
-        inputView.vendingMachinProduct()
+        vendingMachine.setProduct(inputView.vendingMachinProduct())
     }
 
 
