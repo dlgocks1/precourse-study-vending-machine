@@ -1,7 +1,7 @@
 package vendingmachine.view
 
 import vendingmachine.domain.model.Coins
-import java.lang.StringBuilder
+import vendingmachine.domain.model.Coins.Companion.UNIT_LIST
 
 class OutputView {
 
@@ -18,9 +18,14 @@ class OutputView {
     /**
      * 잔돈을 출력한다.
      */
-    fun result() {
-        println("투입 금액: 0")
+    fun returnChange(userMoney: Int, returnChange: List<Int>) {
+        println("투입 금액: $userMoney")
         println("잔돈")
-        // 잔돈 출력
+        println(userMoney)
+        println(returnChange.toString())
+        UNIT_LIST.forEachIndexed { idx, unit ->
+            if (returnChange[idx] == 0) return@forEachIndexed
+            println("${unit}원 - ${returnChange[idx]}개")
+        }
     }
 }
