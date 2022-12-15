@@ -1,16 +1,17 @@
 package vendingmachine.domain.model
 
+import vendingmachine.util.*
 import java.lang.IllegalArgumentException
 
 enum class Coin(
     private val amount: Int,
 ) {
-    COIN_500(500),
-    COIN_100(100),
-    COIN_50(50),
-    COIN_10(10);
+    COIN_500(COIN_UNIT_500),
+    COIN_100(COIN_UNIT_100),
+    COIN_50(COIN_UNIT_50),
+    COIN_10(COIN_UNIT_10);
 
-    var count: Int = 0
+    var count: Int = ZERO
         private set
 
     fun addCount(num: Int = 1) {
@@ -33,7 +34,7 @@ enum class Coin(
                     return it
                 }
             }
-            throw IllegalArgumentException("코인의 단위를 지켜주세요.")
+            throw IllegalArgumentException(ERR_COIN_UNIT)
         }
     }
 }

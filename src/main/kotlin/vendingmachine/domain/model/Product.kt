@@ -1,12 +1,14 @@
 package vendingmachine.domain.model
 
+import vendingmachine.util.ZERO
+
 data class Product(
     val name: String,
     val prize: Int,
     var count: Int,
 ) {
     fun isSoldOut(): Boolean {
-        return count == 0
+        return count == ZERO
     }
 
     fun purchase(): Int {

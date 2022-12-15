@@ -1,5 +1,8 @@
 package vendingmachine.domain.model
 
+import vendingmachine.util.ERR_NO_PRODUCT
+import vendingmachine.util.ERR_SOLD_OUT
+
 class Products(private val products: List<Product>) : List<Product> by products {
     fun minPrize(): Int = products.minOf { it.prize }
     fun isSoldOut(): Boolean = products.all { it.count == 0 }
@@ -10,25 +13,31 @@ class Products(private val products: List<Product>) : List<Product> by products 
 
     private fun checkValidProduct(product: String) {
         val isSoldOut = products.find { it.name == product }?.isSoldOut()
-            ?: throw IllegalArgumentException("구매할 상품이 존재하지 않습니다.")
+            ?: throw IllegalArgumentException(ERR_NO_PRODUCT)
         require(!isSoldOut) {
-            "구매할 상품이 매진 상태입니다."
+            ERR_SOLD_OUT
         }
     }
 
     companion object {
+
+        private const val SEMI_COLON = ";"
+        private const val LEFT_BRACKET = "["
+        private const val RIGHT_BRACKET = "]"
+        private const val COLON = ","
+        private const val BLANK = ""
         fun valueOf(products: String): Products {
             return Products(
-                products.split(";").map { product ->
+                products.split(SEMI_COLON).map { product ->
                     parsingProduct(product)
                 }
             )
         }
 
         private fun parsingProduct(product: String): Product {
-            val parsingResult = product.replace("[", "")
-                .replace("]", "")
-                .split(",")
+            val parsingResult = product.replace(LEFT_BRACKET, BLANK)
+                .replace(RIGHT_BRACKET, BLANK)
+                .split(COLON)
             return Product(
                 name = parsingResult[0],
                 prize = parsingResult[1].toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자여야 합니다."),

@@ -1,5 +1,7 @@
 package vendingmachine.domain.model
 
+import vendingmachine.util.ERR_NO_MONEY
+
 class Money(private var money: Int) {
 
     override fun toString(): String = money.toString()
@@ -13,18 +15,10 @@ class Money(private var money: Int) {
         money -= prize
     }
 
-    operator fun minus(prize: Int) {
-        money -= prize
-    }
-
     private fun overBudgetVerification(prize: Int) {
         require(prize <= money) {
-            "구매할 돈이 부족합니다."
+            ERR_NO_MONEY
         }
-    }
-
-    operator fun div(prize: Int): Int {
-        return money / prize
     }
 
     fun getMoney(): Int {

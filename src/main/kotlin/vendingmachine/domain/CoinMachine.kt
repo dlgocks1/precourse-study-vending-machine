@@ -1,6 +1,7 @@
 package vendingmachine.domain
 
 import vendingmachine.domain.model.Coins
+import vendingmachine.util.ERR_MONEY_UNIT
 
 class CoinMachine(private val coinGenerator: CoinGenerator) {
 
@@ -18,7 +19,7 @@ class CoinMachine(private val coinGenerator: CoinGenerator) {
 
     private fun validateAmount(amount: Int) {
         require(amount % 10 == 0) {
-            "금액은 10원으로 나누어 떨어져야 합니다."
+            ERR_MONEY_UNIT
         }
     }
 
