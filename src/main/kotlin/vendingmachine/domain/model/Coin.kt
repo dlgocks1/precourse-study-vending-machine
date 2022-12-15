@@ -27,6 +27,10 @@ enum class Coin(
         return count
     }
 
+    fun minusCoin(num: Int) {
+        count -= num
+    }
+
     companion object {
         fun createCoin(amount: Int): Coin {
             values().forEach {

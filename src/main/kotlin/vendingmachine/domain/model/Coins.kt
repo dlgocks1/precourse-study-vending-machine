@@ -31,6 +31,7 @@ class Coins(
         var userMoney = totalUserMoney
         coins.forEach { coin ->
             val possibleCount = coin.chargeCoin(userMoney)
+            coin.minusCoin(possibleCount)
             userMoney -= (possibleCount * coin.getAmount())
             charge.add(possibleCount)
         }
