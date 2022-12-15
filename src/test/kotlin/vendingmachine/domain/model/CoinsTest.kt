@@ -1,16 +1,17 @@
 package vendingmachine.domain.model
 
-import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class CoinsTest {
 
-    lateinit var coins: Coins
+    private lateinit var coins: Coins
 
     @BeforeEach
     fun setup() {
@@ -18,12 +19,25 @@ class CoinsTest {
     }
 
     @Test
-    @DisplayName("코인 입력을 테스트한다.")
-    fun slotCoin() {
+    @DisplayName("모든 코인 입력을 테스트한다.")
+    fun totalSlotCoinTest() {
         coins.slotCoin(500)
         coins.slotCoin(100)
-        coins.slotCoin(100)
         coins.slotCoin(50)
-        assertThat(coins.count()).isEqualTo(listOf(1, 2, 1, 0))
+        coins.slotCoin(10)
+        coins.slotCoin(10)
+        coins.slotCoin(100)
+        assertThat(coins.count()).isEqualTo(listOf(1, 2, 1, 2))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "20", "0", "501"])
+    @DisplayName("코인 단위가 맞지 않을 때 오류가 발생한다.")
+    fun validateCoinUnit(coin: Int) {
+        assertThrows<IllegalArgumentException> {
+            coins.slotCoin(coin)
+        }
     }
 }
+
+
