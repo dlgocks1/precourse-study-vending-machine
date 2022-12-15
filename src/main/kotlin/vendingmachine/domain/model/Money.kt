@@ -27,4 +27,8 @@ class Money(private var money: Int) {
         return money / prize
     }
 
+    fun getMoney(): Int {
+        return money
+    }
+
 }

@@ -1,5 +1,10 @@
 package vendingmachine.domain.model
 
+import vendingmachine.util.COIN_UNIT_10
+import vendingmachine.util.COIN_UNIT_100
+import vendingmachine.util.COIN_UNIT_50
+import vendingmachine.util.COIN_UNIT_500
+
 class Coins(
     private val coins: List<Coin> = listOf(Coin.COIN_500, Coin.COIN_100, Coin.COIN_50, Coin.COIN_10)
 ) : List<Coin> by coins {
@@ -15,21 +20,25 @@ class Coins(
     }
 
     private fun validateCoinUnit(unit: Int) {
-        require(unitList.contains(unit)) {
-            "동전의 단위가 잘 못 입력됬습니다."
+        require(UNIT_LIST.contains(unit)) {
+            "동전의 단위가 잘못 입력됬습니다."
         }
     }
 
-    /**
-     * 코인리스트를 반환한다.
-     * 코인 리스트는 500, 100, 50, 10 내림차순으로 반환된다.
-     */
-    fun count(): List<Int> = coins.map {
-        it.count
+
+    fun returnChange(totalUserMoney: Int): List<Int> {
+        val charge = mutableListOf<Int>()
+        var userMoney = totalUserMoney
+        coins.forEach { coin ->
+            val possibleCount = coin.chargeCoin(userMoney)
+            userMoney -= (possibleCount * coin.getAmount())
+            charge.add(possibleCount)
+        }
+        return charge.toList()
     }
 
     companion object {
-        val unitList = listOf(500, 100, 50, 10)
+        val UNIT_LIST = listOf(COIN_UNIT_500, COIN_UNIT_100, COIN_UNIT_50, COIN_UNIT_10)
 
     }
 

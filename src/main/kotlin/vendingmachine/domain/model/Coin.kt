@@ -13,11 +13,18 @@ enum class Coin(
     var count: Int = 0
         private set
 
-    fun addCount() {
-        count += 1
+    fun addCount(num: Int = 1) {
+        count += num
     }
 
     fun getAmount() = amount
+
+    fun chargeCoin(prize: Int): Int {
+        if (count >= prize / amount) {
+            return prize / amount
+        }
+        return count
+    }
 
     companion object {
         fun createCoin(amount: Int): Coin {
