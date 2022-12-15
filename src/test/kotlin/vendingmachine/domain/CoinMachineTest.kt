@@ -27,7 +27,7 @@ class CoinMachineTest {
         coins.slotCoin(100)
         coins.slotCoin(10)
         coins.slotCoin(50)
-        assertThat(coinMachine.generateCoins(660).count()).isEqualTo(coins.count())
+        assertThat(coinMachine.generateCoins(660).map { it.count }).isEqualTo(coins.count())
     }
 
     @ParameterizedTest
