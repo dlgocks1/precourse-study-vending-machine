@@ -5,9 +5,6 @@ class Coins {
     private var coins: List<Coin> = listOf(Coin.COIN_500, Coin.COIN_100, Coin.COIN_50, Coin.COIN_10)
 
     fun slotCoin(coin: Int) {
-        require(validateCoinUnit(coin)) {
-            "동전의 단위가 잘 못 입력됬습니다."
-        }
         when (Coin.createCoin(coin)) {
             Coin.COIN_500 -> coins[0].addCount()
             Coin.COIN_100 -> coins[1].addCount()
@@ -16,7 +13,11 @@ class Coins {
         }
     }
 
-    private fun validateCoinUnit(unit: Int) = unitList.contains(unit)
+    private fun validateCoinUnit(unit: Int) {
+        require(unitList.contains(unit)) {
+            "동전의 단위가 잘 못 입력됬습니다."
+        }
+    }
 
     /**
      * 코인리스트를 반환한다.
