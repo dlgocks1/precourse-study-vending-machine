@@ -1,7 +1,6 @@
 package vendingmachine.domain.model
 
-import vendingmachine.util.ERR_NO_PRODUCT
-import vendingmachine.util.ERR_SOLD_OUT
+import vendingmachine.util.ErrorMessage
 
 class Products(private val products: List<Product>) : List<Product> by products {
     fun minPrize(): Int = products.minOf { it.prize }
@@ -13,9 +12,9 @@ class Products(private val products: List<Product>) : List<Product> by products 
 
     private fun checkValidProduct(product: String) {
         val isSoldOut = products.find { it.name == product }?.isSoldOut()
-            ?: throw IllegalArgumentException(ERR_NO_PRODUCT)
+            ?: throw IllegalArgumentException(ErrorMessage.ERR_NO_PRODUCT)
         require(!isSoldOut) {
-            ERR_SOLD_OUT
+            ErrorMessage.ERR_SOLD_OUT
         }
     }
 

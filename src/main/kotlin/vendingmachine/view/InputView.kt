@@ -8,23 +8,23 @@ import java.lang.IllegalArgumentException
 class InputView {
 
     fun vendingMachineAmount(): Int {
-        println(INPUT_MACHIN_AMOUNT)
+        println(ViewMessage.INPUT_MACHIN_AMOUNT)
         return Console.readLine().toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자로 입력해야 합니다.")
     }
 
     fun vendingMachinProduct(): String {
-        println(INPUT_MACHIN_PRODUCT)
+        println(ViewMessage.INPUT_MACHIN_PRODUCT)
         return Console.readLine()
     }
 
     fun purchaseProduct(money: Money): String {
-        println(INPUT_PURCHASE_MONEY_STATUS.format(money))
-        println(INPUT_PURCHASE_NAME)
+        println(ViewMessage.INPUT_PURCHASE_MONEY_STATUS.format(money))
+        println(ViewMessage.INPUT_PURCHASE_NAME)
         return Console.readLine()
     }
 
     fun userAmount(): Int {
-        println(INPUT_PURCHASE_MONEY)
+        println(ViewMessage.INPUT_PURCHASE_MONEY)
         return Console.readLine().toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자로 입력해야 합니다.")
     }
 }

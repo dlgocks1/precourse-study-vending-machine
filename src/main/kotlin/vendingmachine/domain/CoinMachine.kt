@@ -1,7 +1,9 @@
 package vendingmachine.domain
 
 import vendingmachine.domain.model.Coins
-import vendingmachine.util.ERR_MONEY_UNIT
+import vendingmachine.util.ErrorMessage
+import vendingmachine.util.MINIMUN_UNIT
+import vendingmachine.util.ZERO
 
 class CoinMachine(private val coinGenerator: CoinGenerator) {
 
@@ -9,7 +11,7 @@ class CoinMachine(private val coinGenerator: CoinGenerator) {
         validateAmount(totalAmount)
         val coins = Coins()
         var amount = totalAmount
-        while (amount != 0) {
+        while (amount != ZERO) {
             val coin = coinGenerator.generateRandomCoin(amount)
             amount -= coin
             coins.slotCoin(coin)
@@ -18,8 +20,8 @@ class CoinMachine(private val coinGenerator: CoinGenerator) {
     }
 
     private fun validateAmount(amount: Int) {
-        require(amount % 10 == 0) {
-            ERR_MONEY_UNIT
+        require(amount % MINIMUN_UNIT == ZERO) {
+            ErrorMessage.ERR_MONEY_UNIT
         }
     }
 

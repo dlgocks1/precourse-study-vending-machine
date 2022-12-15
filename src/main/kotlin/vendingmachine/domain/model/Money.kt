@@ -1,6 +1,6 @@
 package vendingmachine.domain.model
 
-import vendingmachine.util.ERR_NO_MONEY
+import vendingmachine.util.ErrorMessage
 
 class Money(private var money: Int) {
 
@@ -17,7 +17,7 @@ class Money(private var money: Int) {
 
     private fun overBudgetVerification(prize: Int) {
         require(prize <= money) {
-            ERR_NO_MONEY
+            ErrorMessage.ERR_NO_MONEY
         }
     }
 

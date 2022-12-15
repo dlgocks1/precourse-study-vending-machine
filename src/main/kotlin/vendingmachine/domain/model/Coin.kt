@@ -38,7 +38,7 @@ enum class Coin(
                     return it
                 }
             }
-            throw IllegalArgumentException(ERR_COIN_UNIT)
+            throw IllegalArgumentException(ErrorMessage.ERR_COIN_UNIT)
         }
     }
 }
