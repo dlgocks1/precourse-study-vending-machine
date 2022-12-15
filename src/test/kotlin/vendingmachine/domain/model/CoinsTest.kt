@@ -25,7 +25,7 @@ class CoinsTest {
         coins.slotCoin(100)
         coins.slotCoin(50)
         coins.slotCoin(10)
-        assertThat(coins.returnChange(Money(600))).isEqualTo(listOf(1, 1, 0, 0))
+        assertThat(coins.returnChange(600)).isEqualTo(listOf(1, 1, 0, 0))
     }
 
     @Test
@@ -35,7 +35,7 @@ class CoinsTest {
         coins.slotCoin(100)
         coins.slotCoin(50)
         coins.slotCoin(10)
-        assertThat(coins.returnChange(Money(610))).isEqualTo(listOf(1, 1, 0, 1))
+        assertThat(coins.returnChange(610)).isEqualTo(listOf(1, 1, 0, 1))
     }
 
     @Test
