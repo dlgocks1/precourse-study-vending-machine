@@ -1,6 +1,7 @@
 package vendingmachine.view
 
 import camp.nextstep.edu.missionutils.Console
+import vendingmachine.domain.model.Money
 import java.lang.IllegalArgumentException
 
 class InputView {
@@ -15,8 +16,8 @@ class InputView {
         return Console.readLine()
     }
 
-    fun purchaseProduct(amount: Int): String {
-        println("투입 금액: ${amount}원")
+    fun purchaseProduct(money: Money): String {
+        println("투입 금액: ${money}원")
         println("구매할 상품명을 입력해 주세요.")
         return Console.readLine()
     }
