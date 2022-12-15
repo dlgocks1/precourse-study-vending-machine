@@ -1,10 +1,11 @@
 package vendingmachine.domain.model
 
-class Coins {
-
-    private var coins: List<Coin> = listOf(Coin.COIN_500, Coin.COIN_100, Coin.COIN_50, Coin.COIN_10)
+class Coins(
+    private val coins: List<Coin> = listOf(Coin.COIN_500, Coin.COIN_100, Coin.COIN_50, Coin.COIN_10)
+) : List<Coin> by coins {
 
     fun slotCoin(coin: Int) {
+        validateCoinUnit(coin)
         when (Coin.createCoin(coin)) {
             Coin.COIN_500 -> coins[0].addCount()
             Coin.COIN_100 -> coins[1].addCount()
