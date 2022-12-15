@@ -3,9 +3,9 @@ package vendingmachine.domain.model
 class Products(private val products: List<Product>) : List<Product> by products {
     fun minPrize(): Int = products.minOf { it.prize }
     fun isSoldOut(): Boolean = products.all { it.count == 0 }
-    fun purchase(product: String) {
+    fun purchase(product: String): Int {
         checkValidProduct(product)
-        products.find { it.name == product }?.purchase()
+        return products.find { it.name == product }!!.purchase() // 해당 상품이 존재하는지는 이미 체크했음
     }
 
     private fun checkValidProduct(product: String) {
