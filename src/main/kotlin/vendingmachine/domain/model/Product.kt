@@ -9,7 +9,8 @@ data class Product(
         return count == 0
     }
 
-    fun purchase() {
+    fun purchase(): Int {
         count -= 1
+        return prize
     }
 }

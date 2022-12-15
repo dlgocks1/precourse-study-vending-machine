@@ -18,8 +18,21 @@ class VendingMachineController(
         setAmount()
         setProduct()
         setUserAmount()
+        purchaseProduct()
+        returnChange()
     }
 
+    private fun returnChange() {
+        outputView.returnChange(vendingMachine.returnChange(userMoney))
+    }
+
+    private fun purchaseProduct() {
+        while (userMoney.lessThan(vendingMachine.getProductsMinPrize())
+            || vendingMachine.isSoldOut()
+        ) {
+            userMoney.spend(vendingMachine.purchase(inputView.purchaseProduct(userMoney)))
+        }
+    }
 
     private fun setAmount() {
         vendingMachine.generateCoins(inputView.vendingMachineAmount())
