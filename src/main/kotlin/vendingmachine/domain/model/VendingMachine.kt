@@ -25,9 +25,8 @@ class VendingMachine(private val coinGenerator: CoinGenerator) {
         return products.purchase(product)
     }
 
-    fun returnChange(userMoney: Money): Coins {
-        coins.returnChange(userMoney)
-        return Coins()
+    fun returnChange(userMoney: Int): List<Int> {
+        return coins.returnChange(userMoney)
     }
 
 }

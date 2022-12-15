@@ -23,12 +23,13 @@ class VendingMachineController(
     }
 
     private fun returnChange() {
-        outputView.returnChange(vendingMachine.returnChange(userMoney))
+        val totalMoney = userMoney.getMoney()
+        outputView.returnChange(totalMoney, vendingMachine.returnChange(totalMoney))
     }
 
     private fun purchaseProduct() {
-        while (userMoney.lessThan(vendingMachine.getProductsMinPrize())
-            || vendingMachine.isSoldOut()
+        while (!(userMoney.lessThan(vendingMachine.getProductsMinPrize())
+                    || vendingMachine.isSoldOut())
         ) {
             userMoney.spend(vendingMachine.purchase(inputView.purchaseProduct(userMoney)))
         }
