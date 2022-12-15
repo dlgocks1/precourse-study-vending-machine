@@ -12,18 +12,18 @@ class InputView {
     }
 
     fun vendingMachinProduct(): String {
-        println("상품명과 가격, 수량을 입력해 주세요.")
+        println("\n상품명과 가격, 수량을 입력해 주세요.")
         return Console.readLine()
     }
 
     fun purchaseProduct(money: Money): String {
-        println("투입 금액: ${money}원")
+        println("\n투입 금액: ${money}원")
         println("구매할 상품명을 입력해 주세요.")
         return Console.readLine()
     }
 
     fun userAmount(): Int {
-        println("투입 금액을 입력해 주세요.")
+        println("\n투입 금액을 입력해 주세요.")
         return Console.readLine().toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자로 입력해야 합니다.")
     }
 }
